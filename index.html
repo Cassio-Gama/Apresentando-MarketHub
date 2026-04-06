@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducing MarketHub | Cinematic Experience</title>
+    
+    <!-- SEO & Meta -->
+    <meta name="description" content="A cinematic presentation of MarketHub, a high-performance financial dashboard built with C# and Vanilla JS.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@300;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <header id="hero" class="section">
+            <div class="glow top-right"></div>
+            <div class="reveal">
+                <h1 class="hero-title">MarketHub<span>.</span></h1>
+                <p class="sub-title">Um dashboard simples, inspirado no mercado financeiro.</p>
+            </div>
+        </header>
+
+        <!-- Ticker Reveal -->
+        <section id="ticker-section" class="section">
+            <div class="reveal">
+                <h2 class="hero-title hero-gradient">Sempre em Movimento.</h2>
+                <p class="sub-title">Dados em tempo real, integrados diretamente ao seu terminal.</p>
+            </div>
+            
+            <div class="ticker-hero reveal-stagger">
+                <div class="ticker-track" id="ticker-track">
+                    <!-- Spawning mock items if live data fails, or live items -->
+                    <div class="ticker-item">IBOVESPA <span class="price">128.450 pts</span> <span class="change positive">+1.2%</span></div>
+                    <div class="ticker-item">PETR4 <span class="price">R$ 38.20</span> <span class="change positive">+2.1%</span></div>
+                    <div class="ticker-item">VALE3 <span class="price">R$ 62.15</span> <span class="change negative">-0.5%</span></div>
+                    <div class="ticker-item">Dólar <span class="price">R$ 5.05</span> <span class="change positive">+0.3%</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UI Feature Section -->
+        <section id="interface" class="section">
+            <div class="reveal">
+                <h2 class="hero-title hero-gradient">Clareza Absoluta.</h2>
+                <p class="sub-title">Interfaces limpas que priorizam o que realmente importa: a sua decisão.</p>
+            </div>
+
+            <div class="dashboard-mockup reveal-stagger">
+                <div class="mockup-nav">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                </div>
+                <div class="mockup-content">
+                    <div class="mock-chart">
+                        <!-- SVG Chart Path -->
+                        <svg viewBox="0 0 500 300" width="100%" height="100%" preserveAspectRatio="none">
+                            <path class="mock-line" d="M0,250 C50,230 100,240 150,180 C200,120 250,150 300,110 C350,70 400,90 450,40 L500,30" />
+                        </svg>
+                    </div>
+                    <div class="mock-sidebar">
+                        <div class="mock-item"></div>
+                        <div class="mock-item"></div>
+                        <div class="mock-item"></div>
+                        <div class="mock-item"></div>
+                        <div class="mock-item"></div>
+                        <div class="mock-item"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grid Tech Section -->
+        <section id="tech" class="section">
+            <div class="glow bottom-left"></div>
+            <div class="reveal">
+                <h2 class="hero-title hero-gradient">Poder Sob o Capô.</h2>
+                <p class="sub-title">Uma stack de última geração para performance crítica.</p>
+            </div>
+
+            <div class="grid-reveal reveal-stagger">
+                <article class="card-ghost">
+                    <div class="card-icon">#</div>
+                    <h3>C# .NET 9.0</h3>
+                    <p>Processamento robusto e escalável no backend para entrega de dados sem latência.</p>
+                </article>
+                <article class="card-ghost">
+                    <div class="card-icon">⚡</div>
+                    <h3>GitHub Actions</h3>
+                    <p>Pipeline de CI/CD automatizado garantindo que seu dashboard esteja online.</p>
+                </article>
+                <article class="card-ghost">
+                    <div class="card-icon">🎨</div>
+                    <h3>Vanilla UI</h3>
+                    <p>Zero bloat. Performance pura em Javascript e CSS para uma experiência instantânea.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Closing CTA -->
+        <footer id="cta" class="section">
+            <div class="reveal">
+                <h1 class="hero-title">Pronto para<br>começar?</h1>
+                <p class="sub-title" style="margin-bottom: 2.5rem;">MarketHub: uma visão clara e direta para o seu dia a dia.</p>
+                <a href="https://cassio-gama.github.io/Market-Hub/" class="cta-btn" style="margin-bottom: 4rem; display: inline-block;">Acessar o Terminal</a>
+                
+                <p class="credit" style="font-size: 1rem; opacity: 0.6; margin-top: 4rem;">
+                    Projetado por <span class="author">Cassio Gama</span> — São Paulo, Brasil.
+                </p>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Intersection Observer for Reveal Animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+
+        // Fetch Real Live Data for Ticker Integration
+        async function fetchLiveData() {
+            try {
+                const response = await fetch('https://cassio-gama.github.io/Market-Hub/data.json');
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                const track = document.getElementById('ticker-track');
+                
+                if (data && data.length > 0) {
+                    track.innerHTML = ''; // Clear defaults
+                    // Double the items for seamless loop
+                    const displayItems = [...data, ...data];
+                    displayItems.forEach(item => {
+                        const div = document.createElement('div');
+                        div.className = 'ticker-item';
+                        const changeClass = item.ChangePercent >= 0 ? 'positive' : 'negative';
+                        const sign = item.ChangePercent >= 0 ? '+' : '';
+                        div.innerHTML = `${item.Symbol} <span class="price">R$ ${item.Price.toFixed(2)}</span> <span class="change ${changeClass}">${sign}${item.ChangePercent.toFixed(2)}%</span>`;
+                        track.appendChild(div);
+                    });
+                }
+            } catch (error) {
+                console.warn("Live data fetch failed. Using fallback mockups.", error);
+            }
+        }
+
+        fetchLiveData();
+
+        // Parallax effect on scroll for glows
+        window.addEventListener('scroll', () => {
+            const scroll = window.scrollY;
+            document.querySelectorAll('.glow').forEach((glow, index) => {
+                const speed = (index + 1) * 0.15;
+                glow.style.transform = `translateY(${scroll * speed}px)`;
+            });
+        }, { passive: true });
+    </script>
+</body>
+</html>
